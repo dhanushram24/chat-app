@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
   <!-- Custom Chat App Styles -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
@@ -30,7 +30,10 @@
           <span class="avatar-badge-online" title="Online"></span>
         </div>
         <div class="user-info-text">
-          <h1 class="user-name">Rahul Sharma</h1>
+          <div class="user-name-wrapper">
+            <h1 class="user-name">Rahul Sharma</h1>
+            <span class="sender-type-badge badge-client">Client</span>
+          </div>
           <div class="user-status">
             <span class="status-dot"></span>
             <span>Online</span>
@@ -74,7 +77,18 @@
       </div>
     </header>
 
-    <!-- 2. Chat Stream / Body -->
+    <!-- 2. Notes & Type Category Tabs Bar -->
+    <nav class="chat-tabs-bar" aria-label="Notes categories">
+      <div class="tabs-scroll-container">
+        <button class="chat-tab-btn active" data-category="user">User Notes</button>
+        <button class="chat-tab-btn" data-category="client">Client Notes</button>
+        <button class="chat-tab-btn" data-category="feedback">Client Feedback</button>
+        <button class="chat-tab-btn" data-category="partner">Channel Partner Notes</button>
+        <button class="chat-tab-btn" data-category="all">All Notes</button>
+      </div>
+    </nav>
+
+    <!-- 3. Chat Stream / Body -->
     <main class="chat-body-container" id="chat-messages-container">
       
       <!-- Date Divider -->
@@ -85,12 +99,16 @@
       <!-- Messages Stream -->
       <div class="message-list" id="message-list">
 
-        <!-- 1. Incoming Message (Rahul) -->
-        <div class="message-row incoming">
+        <!-- 1. Incoming Message (Rahul - Client Notes) -->
+        <div class="message-row incoming" data-category="client" data-type="client">
           <div class="msg-avatar">
             <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma">
           </div>
           <div class="message-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Rahul Sharma</span>
+              <span class="sender-type-badge badge-client">Client</span>
+            </div>
             <p class="message-content">Hi Dhanush! 👋
 Can you share the latest update on the client portal?</p>
             <div class="message-meta">
@@ -99,9 +117,13 @@ Can you share the latest update on the client portal?</p>
           </div>
         </div>
 
-        <!-- 2. Outgoing Message (Dhanush) -->
-        <div class="message-row outgoing">
+        <!-- 2. Outgoing Message (Dhanush - User Notes) -->
+        <div class="message-row outgoing" data-category="user" data-type="user">
           <div class="message-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Dhanush</span>
+              <span class="sender-type-badge badge-user-bubble">User</span>
+            </div>
             <p class="message-content">Hey Rahul!
 Yes, I've almost fixed the remaining bugs.
 The API integration is working fine now.
@@ -117,12 +139,16 @@ I'll push the final changes by today evening.</p>
           </div>
         </div>
 
-        <!-- 3. Incoming Message (Rahul) -->
-        <div class="message-row incoming">
+        <!-- 3. Incoming Message (Rahul - Client Feedback) -->
+        <div class="message-row incoming" data-category="feedback" data-type="client">
           <div class="msg-avatar">
             <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma">
           </div>
           <div class="message-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Rahul Sharma</span>
+              <span class="sender-type-badge badge-client">Client</span>
+            </div>
             <p class="message-content">That’s great! 👍
 Please also check the login issue on the mobile app.
 Some users are facing trouble.</p>
@@ -132,12 +158,33 @@ Some users are facing trouble.</p>
           </div>
         </div>
 
-        <!-- 4. Outgoing Message (Dhanush) -->
-        <div class="message-row outgoing">
+        <!-- 4. Incoming Message (Vikram Reddy - Channel Partner Notes) -->
+        <div class="message-row incoming" data-category="partner" data-type="partner">
+          <div class="msg-avatar">
+            <img src="assets/avatars/vikram.jpg" alt="Vikram Reddy">
+          </div>
           <div class="message-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Vikram Reddy</span>
+              <span class="sender-type-badge badge-partner">Partner</span>
+            </div>
+            <p class="message-content">Hi Dhanush & Rahul, channel partner API webhooks are tested and ready for deployment.</p>
+            <div class="message-meta">
+              <span class="message-time">10:28 AM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Outgoing Message (Dhanush - User Notes) -->
+        <div class="message-row outgoing" data-category="user" data-type="user">
+          <div class="message-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Dhanush</span>
+              <span class="sender-type-badge badge-user-bubble">User</span>
+            </div>
             <p class="message-content">Sure, I'll check and update you soon.</p>
             <div class="message-meta">
-              <span class="message-time">10:22 AM</span>
+              <span class="message-time">10:32 AM</span>
               <span class="read-receipt-ticks" title="Read">
                 <svg viewBox="0 0 16 15">
                   <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
@@ -147,12 +194,16 @@ Some users are facing trouble.</p>
           </div>
         </div>
 
-        <!-- 5. Incoming Message with ZIP File Attachment (Rahul) -->
-        <div class="message-row incoming">
+        <!-- 6. Incoming Message with ZIP File Attachment (Rahul - Client Notes) -->
+        <div class="message-row incoming" data-category="client" data-type="client">
           <div class="msg-avatar">
             <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma">
           </div>
           <div class="message-bubble attachment-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Rahul Sharma</span>
+              <span class="sender-type-badge badge-client">Client</span>
+            </div>
             <p class="message-content">Perfect! I'll check and get back to you.</p>
             <div class="message-meta-inline">
               <span class="message-time">10:42 AM</span>
@@ -189,9 +240,13 @@ Some users are facing trouble.</p>
           </div>
         </div>
 
-        <!-- 6. Outgoing Message (Dhanush) -->
-        <div class="message-row outgoing">
+        <!-- 7. Outgoing Message (Dhanush - User Notes) -->
+        <div class="message-row outgoing" data-category="user" data-type="user">
           <div class="message-bubble">
+            <div class="message-sender-header">
+              <span class="sender-name">Dhanush</span>
+              <span class="sender-type-badge badge-user-bubble">User</span>
+            </div>
             <p class="message-content">Thanks! &#128588;</p>
             <div class="message-meta">
               <span class="message-time">10:43 AM</span>
@@ -214,59 +269,74 @@ Some users are facing trouble.</p>
       <div class="mention-popup-container" id="mention-popup">
         <ul class="mention-list" id="mention-list">
           
-          <!-- 1. Rahul Sharma (Selected) -->
+          <!-- 1. Rahul Sharma (Client) -->
           <li class="mention-item active" data-username="Rahul" data-fullname="Rahul Sharma">
             <div class="mention-avatar-box">
               <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma" class="mention-avatar-img">
               <span class="mention-online-indicator"></span>
             </div>
             <div class="mention-info">
-              <span class="mention-name">Rahul Sharma</span>
+              <div class="mention-name-row">
+                <span class="mention-name">Rahul Sharma</span>
+                <span class="mention-type-badge badge-client">Client</span>
+              </div>
               <span class="mention-role">Product Manager</span>
             </div>
           </li>
 
-          <!-- 2. Priya Nair -->
+          <!-- 2. Priya Nair (User) -->
           <li class="mention-item" data-username="Priya" data-fullname="Priya Nair">
             <div class="mention-avatar-box">
               <img src="assets/avatars/priya.jpg" alt="Priya Nair" class="mention-avatar-img">
             </div>
             <div class="mention-info">
-              <span class="mention-name">Priya Nair</span>
+              <div class="mention-name-row">
+                <span class="mention-name">Priya Nair</span>
+                <span class="mention-type-badge badge-user">User</span>
+              </div>
               <span class="mention-role">UI/UX Designer</span>
             </div>
           </li>
 
-          <!-- 3. Vikram Reddy -->
+          <!-- 3. Vikram Reddy (Partner) -->
           <li class="mention-item" data-username="Vikram" data-fullname="Vikram Reddy">
             <div class="mention-avatar-box">
               <img src="assets/avatars/vikram.jpg" alt="Vikram Reddy" class="mention-avatar-img">
             </div>
             <div class="mention-info">
-              <span class="mention-name">Vikram Reddy</span>
+              <div class="mention-name-row">
+                <span class="mention-name">Vikram Reddy</span>
+                <span class="mention-type-badge badge-partner">Partner</span>
+              </div>
               <span class="mention-role">Backend Developer</span>
             </div>
           </li>
 
-          <!-- 4. Ananya Iyer -->
+          <!-- 4. Ananya Iyer (User) -->
           <li class="mention-item" data-username="Ananya" data-fullname="Ananya Iyer">
             <div class="mention-avatar-box">
               <img src="assets/avatars/ananya.jpg" alt="Ananya Iyer" class="mention-avatar-img">
             </div>
             <div class="mention-info">
-              <span class="mention-name">Ananya Iyer</span>
+              <div class="mention-name-row">
+                <span class="mention-name">Ananya Iyer</span>
+                <span class="mention-type-badge badge-user">User</span>
+              </div>
               <span class="mention-role">Frontend Developer</span>
             </div>
           </li>
 
-          <!-- 5. Suresh Kumar -->
+          <!-- 5. Suresh Kumar (Partner) -->
           <li class="mention-item" data-username="Suresh" data-fullname="Suresh Kumar">
             <div class="mention-avatar-box">
               <img src="assets/avatars/suresh.jpg" alt="Suresh Kumar" class="mention-avatar-img">
               <span class="mention-online-indicator"></span>
             </div>
             <div class="mention-info">
-              <span class="mention-name">Suresh Kumar</span>
+              <div class="mention-name-row">
+                <span class="mention-name">Suresh Kumar</span>
+                <span class="mention-type-badge badge-partner">Partner</span>
+              </div>
               <span class="mention-role">QA Engineer</span>
             </div>
           </li>
@@ -338,7 +408,7 @@ Some users are facing trouble.</p>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <!-- Interactive Logic -->
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=3"></script>
 
 </body>
 </html>

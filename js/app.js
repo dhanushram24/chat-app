@@ -1,6 +1,6 @@
 /**
  * Chat Application UI Logic
- * Handles interactive mentions, message sending, and responsive behaviors.
+ * Handles interactive mentions, category tabs filtering, message sending, and responsive behaviors.
  */
 
 $(document).ready(function () {
@@ -12,6 +12,7 @@ $(document).ready(function () {
   const $chatMessagesContainer = $('#chat-messages-container');
   const $btnSendMessage = $('#btn-send-message');
   const $btnDownload = $('#btn-download');
+  const $tabBtns = $('.chat-tab-btn');
 
   // Helper to scroll to the bottom of the chat
   function scrollToBottom() {
@@ -21,7 +22,31 @@ $(document).ready(function () {
     );
   }
 
-  // Toggle mention popup visibility
+  // 1. Tab category filter logic
+  $tabBtns.on('click', function () {
+    const $btn = $(this);
+    const category = $btn.data('category');
+
+    $tabBtns.removeClass('active');
+    $btn.addClass('active');
+
+    const $rows = $('.message-row');
+    if (category === 'all') {
+      $rows.removeClass('dimmed').show();
+    } else {
+      $rows.each(function () {
+        const rowCategory = $(this).data('category');
+        if (rowCategory === category) {
+          $(this).removeClass('dimmed').show();
+        } else {
+          // Dim other categories so context is preserved or filtered
+          $(this).addClass('dimmed');
+        }
+      });
+    }
+  });
+
+  // 2. Toggle mention popup visibility
   $mentionTrigger.on('click', function (e) {
     e.stopPropagation();
     $mentionPopup.toggleClass('hidden');
@@ -29,7 +54,7 @@ $(document).ready(function () {
     $chatInput.focus();
   });
 
-  // Handle clicking on a mention item
+  // 3. Handle clicking on a mention item
   $mentionItems.on('click', function (e) {
     e.stopPropagation();
     const username = $(this).data('username');
@@ -53,7 +78,7 @@ $(document).ready(function () {
     $chatInput.focus();
   });
 
-  // Close mention popup when clicking outside
+  // 4. Close mention popup when clicking outside
   $(document).on('click', function (e) {
     if (!$(e.target).closest('#mention-popup, #btn-mention-trigger').length) {
       $mentionPopup.addClass('hidden');
@@ -61,7 +86,7 @@ $(document).ready(function () {
     }
   });
 
-  // Input typing listener to detect '@'
+  // 5. Input typing listener to detect '@'
   $chatInput.on('input', function () {
     const val = $(this).val();
     const lastChar = val.slice(-1);
@@ -75,7 +100,7 @@ $(document).ready(function () {
     }
   });
 
-  // Send message function
+  // 6. Send message function
   function sendMessage() {
     const text = $chatInput.val().trim();
     if (!text) return;
@@ -88,10 +113,14 @@ $(document).ready(function () {
     hours = hours ? hours : 12;
     const formattedTime = hours + ':' + minutes + ' ' + ampm;
 
-    // Create new outgoing message bubble
+    // Create new outgoing message bubble with sender name and User type badge
     const $newMsg = $(`
-      <div class="message-row outgoing">
+      <div class="message-row outgoing" data-category="user" data-type="user">
         <div class="message-bubble">
+          <div class="message-sender-header">
+            <span class="sender-name">Dhanush</span>
+            <span class="sender-type-badge badge-user-bubble">User</span>
+          </div>
           <p class="message-content">${escapeHtml(text)}</p>
           <div class="message-meta">
             <span class="message-time">${formattedTime}</span>
