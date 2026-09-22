@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App - Rahul Sharma</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 3.4.1 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- Custom Chat App Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Chat App Shell -->
+  <div class="chat-app-wrapper">
+
+    <!-- 1. Header Bar -->
+    <header class="chat-header">
+      <div class="chat-header-profile">
+        <div class="avatar-wrapper">
+          <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma" class="avatar-img img-circle">
+          <span class="avatar-badge-online" title="Online"></span>
+        </div>
+        <div class="user-info-text">
+          <h1 class="user-name">Rahul Sharma</h1>
+          <div class="user-status">
+            <span class="status-dot"></span>
+            <span>Online</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header Action Buttons -->
+      <div class="chat-header-actions">
+        <!-- Call Button -->
+        <button class="btn btn-default btn-header-action" title="Start voice call" id="btn-call">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </button>
+
+        <!-- Video Call Button -->
+        <button class="btn btn-default btn-header-action" title="Start video call" id="btn-video">
+          <svg viewBox="0 0 24 24">
+            <polygon points="23 7 16 12 23 17 23 7"/>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+          </svg>
+        </button>
+
+        <!-- Search Button -->
+        <button class="btn btn-default btn-header-action" title="Search messages" id="btn-search">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+
+        <!-- More Options Menu -->
+        <button class="btn btn-default btn-header-action" title="More options" id="btn-more">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="5" r="1.5" fill="currentColor"/>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+            <circle cx="12" cy="19" r="1.5" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 2. Chat Stream / Body -->
+    <main class="chat-body-container" id="chat-messages-container">
+      
+      <!-- Date Divider -->
+      <div class="chat-date-divider">
+        <span class="date-pill">Today</span>
+      </div>
+
+      <!-- Messages Stream -->
+      <div class="message-list" id="message-list">
+
+        <!-- 1. Incoming Message (Rahul) -->
+        <div class="message-row incoming">
+          <div class="msg-avatar">
+            <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma">
+          </div>
+          <div class="message-bubble">
+            <p class="message-content">Hi Dhanush! 👋
+Can you share the latest update on the client portal?</p>
+            <div class="message-meta">
+              <span class="message-time">10:12 AM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Outgoing Message (Dhanush) -->
+        <div class="message-row outgoing">
+          <div class="message-bubble">
+            <p class="message-content">Hey Rahul!
+Yes, I've almost fixed the remaining bugs.
+The API integration is working fine now.
+I'll push the final changes by today evening.</p>
+            <div class="message-meta">
+              <span class="message-time">10:15 AM</span>
+              <span class="read-receipt-ticks" title="Read">
+                <svg viewBox="0 0 16 15">
+                  <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Incoming Message (Rahul) -->
+        <div class="message-row incoming">
+          <div class="msg-avatar">
+            <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma">
+          </div>
+          <div class="message-bubble">
+            <p class="message-content">That’s great! 👍
+Please also check the login issue on the mobile app.
+Some users are facing trouble.</p>
+            <div class="message-meta">
+              <span class="message-time">10:20 AM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Outgoing Message (Dhanush) -->
+        <div class="message-row outgoing">
+          <div class="message-bubble">
+            <p class="message-content">Sure, I'll check and update you soon.</p>
+            <div class="message-meta">
+              <span class="message-time">10:22 AM</span>
+              <span class="read-receipt-ticks" title="Read">
+                <svg viewBox="0 0 16 15">
+                  <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Incoming Message with ZIP File Attachment (Rahul) -->
+        <div class="message-row incoming">
+          <div class="msg-avatar">
+            <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma">
+          </div>
+          <div class="message-bubble attachment-bubble">
+            <p class="message-content">Perfect! I'll check and get back to you.</p>
+            <div class="message-meta-inline">
+              <span class="message-time">10:42 AM</span>
+            </div>
+            
+            <!-- File Attachment Box -->
+            <div class="attachment-card">
+              <div class="attachment-left">
+                <div class="file-icon-box">
+                  <!-- Zip Document Icon -->
+                  <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <polyline points="14 2 14 8 20 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="18" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="9" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="file-details">
+                  <span class="file-name">client_portal_update.zip</span>
+                  <span class="file-size-type">2.4 MB &bull; ZIP</span>
+                </div>
+              </div>
+              <button class="btn btn-default btn-download-file" title="Download file" id="btn-download">
+                <svg viewBox="0 0 24 24">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+              </button>
+            </div>
+            <div class="message-meta">
+              <span class="message-time">10:42 AM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Outgoing Message (Dhanush) -->
+        <div class="message-row outgoing">
+          <div class="message-bubble">
+            <p class="message-content">Thanks! &#128588;</p>
+            <div class="message-meta">
+              <span class="message-time">10:43 AM</span>
+              <span class="read-receipt-ticks" title="Read">
+                <svg viewBox="0 0 16 15">
+                  <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- 4. Footer Input Bar -->
+    <footer class="chat-footer">
+      
+      <!-- Autocomplete / Mention Popup (Floating directly above input bar) -->
+      <div class="mention-popup-container" id="mention-popup">
+        <ul class="mention-list" id="mention-list">
+          
+          <!-- 1. Rahul Sharma (Selected) -->
+          <li class="mention-item active" data-username="Rahul" data-fullname="Rahul Sharma">
+            <div class="mention-avatar-box">
+              <img src="assets/avatars/rahul.jpg" alt="Rahul Sharma" class="mention-avatar-img">
+              <span class="mention-online-indicator"></span>
+            </div>
+            <div class="mention-info">
+              <span class="mention-name">Rahul Sharma</span>
+              <span class="mention-role">Product Manager</span>
+            </div>
+          </li>
+
+          <!-- 2. Priya Nair -->
+          <li class="mention-item" data-username="Priya" data-fullname="Priya Nair">
+            <div class="mention-avatar-box">
+              <img src="assets/avatars/priya.jpg" alt="Priya Nair" class="mention-avatar-img">
+            </div>
+            <div class="mention-info">
+              <span class="mention-name">Priya Nair</span>
+              <span class="mention-role">UI/UX Designer</span>
+            </div>
+          </li>
+
+          <!-- 3. Vikram Reddy -->
+          <li class="mention-item" data-username="Vikram" data-fullname="Vikram Reddy">
+            <div class="mention-avatar-box">
+              <img src="assets/avatars/vikram.jpg" alt="Vikram Reddy" class="mention-avatar-img">
+            </div>
+            <div class="mention-info">
+              <span class="mention-name">Vikram Reddy</span>
+              <span class="mention-role">Backend Developer</span>
+            </div>
+          </li>
+
+          <!-- 4. Ananya Iyer -->
+          <li class="mention-item" data-username="Ananya" data-fullname="Ananya Iyer">
+            <div class="mention-avatar-box">
+              <img src="assets/avatars/ananya.jpg" alt="Ananya Iyer" class="mention-avatar-img">
+            </div>
+            <div class="mention-info">
+              <span class="mention-name">Ananya Iyer</span>
+              <span class="mention-role">Frontend Developer</span>
+            </div>
+          </li>
+
+          <!-- 5. Suresh Kumar -->
+          <li class="mention-item" data-username="Suresh" data-fullname="Suresh Kumar">
+            <div class="mention-avatar-box">
+              <img src="assets/avatars/suresh.jpg" alt="Suresh Kumar" class="mention-avatar-img">
+              <span class="mention-online-indicator"></span>
+            </div>
+            <div class="mention-info">
+              <span class="mention-name">Suresh Kumar</span>
+              <span class="mention-role">QA Engineer</span>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+      
+      <!-- Left Action Buttons -->
+      <div class="footer-actions-left">
+        <!-- Attachment Clip -->
+        <button class="btn btn-default btn-attach" title="Attach file" id="btn-attach-file">
+          <svg viewBox="0 0 24 24">
+            <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+          </svg>
+        </button>
+
+        <!-- Image / Gallery -->
+        <button class="btn btn-default btn-attach" title="Attach photo or image" id="btn-attach-image">
+          <svg viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </button>
+
+        <!-- Mention @ Button -->
+        <button class="btn btn-default btn-attach active" title="Mention someone" id="btn-mention-trigger">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Center Text Input -->
+      <div class="chat-input-wrapper">
+        <input 
+          type="text" 
+          id="chat-input" 
+          class="chat-input-field" 
+          value="@Rahul can you check this and confirm?" 
+          placeholder="Type a message..." 
+          autocomplete="off"
+        >
+        <!-- Emoji Button -->
+        <button class="btn-emoji" title="Insert emoji" id="btn-emoji-trigger">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="15" y1="9" x2="15.01" y2="9" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Send Button -->
+      <button class="btn-send" title="Send message" id="btn-send-message">
+        <svg viewBox="0 0 24 24">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+
+    </footer>
+
+  </div>
+
+  <!-- jQuery 3.7.1 & Bootstrap 3.4.1 JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- Interactive Logic -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>
