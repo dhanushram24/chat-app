@@ -1,6 +1,7 @@
 /**
  * Chat Application UI Logic
- * Handles interactive mentions, category tabs filtering, message sending, and responsive behaviors.
+ * Handles real-time search across all notes & messages,
+ * on-demand @mentions, and message sending.
  */
 
 $(document).ready(function () {
@@ -12,7 +13,9 @@ $(document).ready(function () {
   const $chatMessagesContainer = $('#chat-messages-container');
   const $btnSendMessage = $('#btn-send-message');
   const $btnDownload = $('#btn-download');
-  const $tabBtns = $('.chat-tab-btn');
+  const $btnHeaderSearch = $('#btn-search');
+  const $chatSearchInput = $('#chat-search-input');
+  const $btnClearSearch = $('#btn-clear-search');
 
   // Helper to scroll to the bottom of the chat
   function scrollToBottom() {
@@ -22,31 +25,46 @@ $(document).ready(function () {
     );
   }
 
-  // 1. Tab category filter logic
-  $tabBtns.on('click', function () {
-    const $btn = $(this);
-    const category = $btn.data('category');
-
-    $tabBtns.removeClass('active');
-    $btn.addClass('active');
-
+  // 1. Search Bar Logic (Real-time live search in all notes & messages)
+  $chatSearchInput.on('input', function () {
+    const query = $(this).val().trim().toLowerCase();
     const $rows = $('.message-row');
-    if (category === 'all') {
-      $rows.removeClass('dimmed').show();
-    } else {
+
+    if (query.length > 0) {
+      $btnClearSearch.removeClass('hidden');
+
       $rows.each(function () {
-        const rowCategory = $(this).data('category');
-        if (rowCategory === category) {
-          $(this).removeClass('dimmed').show();
+        const $row = $(this);
+        const text = $row.find('.message-content').text().toLowerCase();
+        const sender = $row.find('.sender-name').text().toLowerCase();
+        const type = $row.find('.sender-type-badge').text().toLowerCase();
+        const fileName = $row.find('.file-name').text().toLowerCase();
+
+        const match = text.includes(query) || sender.includes(query) || type.includes(query) || fileName.includes(query);
+
+        if (match) {
+          $row.removeClass('search-hidden').addClass('search-highlight');
         } else {
-          // Dim other categories so context is preserved or filtered
-          $(this).addClass('dimmed');
+          $row.addClass('search-hidden').removeClass('search-highlight');
         }
       });
+    } else {
+      $btnClearSearch.addClass('hidden');
+      $rows.removeClass('search-hidden search-highlight');
     }
   });
 
-  // 2. Toggle mention popup visibility
+  // Clear search input
+  $btnClearSearch.on('click', function () {
+    $chatSearchInput.val('').trigger('input').focus();
+  });
+
+  // Header search icon click: focus search bar
+  $btnHeaderSearch.on('click', function () {
+    $chatSearchInput.focus().select();
+  });
+
+  // 2. Toggle mention popup visibility (on-demand only)
   $mentionTrigger.on('click', function (e) {
     e.stopPropagation();
     $mentionPopup.toggleClass('hidden');
@@ -91,7 +109,7 @@ $(document).ready(function () {
     const val = $(this).val();
     const lastChar = val.slice(-1);
     
-    if (lastChar === '@' || (val.includes('@') && !$mentionPopup.is(':visible'))) {
+    if (lastChar === '@') {
       $mentionPopup.removeClass('hidden');
       $mentionTrigger.addClass('active');
     } else if (!val.includes('@')) {

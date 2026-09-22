@@ -77,16 +77,28 @@
       </div>
     </header>
 
-    <!-- 2. Notes & Type Category Tabs Bar -->
-    <nav class="chat-tabs-bar" aria-label="Notes categories">
-      <div class="tabs-scroll-container">
-        <button class="chat-tab-btn active" data-category="user">User Notes</button>
-        <button class="chat-tab-btn" data-category="client">Client Notes</button>
-        <button class="chat-tab-btn" data-category="feedback">Client Feedback</button>
-        <button class="chat-tab-btn" data-category="partner">Channel Partner Notes</button>
-        <button class="chat-tab-btn" data-category="all">All Notes</button>
+    <!-- 2. Chat Search Bar (Search in all notes & messages) -->
+    <div class="chat-search-bar">
+      <div class="search-input-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input 
+          type="text" 
+          id="chat-search-input" 
+          class="chat-search-field" 
+          placeholder="Search in all notes and messages (e.g. User, Client, Partner, portal)..." 
+          autocomplete="off"
+        >
+        <button class="btn-clear-search hidden" id="btn-clear-search" title="Clear search">
+          <svg viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
       </div>
-    </nav>
+    </div>
 
     <!-- 3. Chat Stream / Body -->
     <main class="chat-body-container" id="chat-messages-container">
@@ -265,8 +277,8 @@ Some users are facing trouble.</p>
     <!-- 4. Footer Input Bar -->
     <footer class="chat-footer">
       
-      <!-- Autocomplete / Mention Popup (Floating directly above input bar) -->
-      <div class="mention-popup-container" id="mention-popup">
+      <!-- Autocomplete / Mention Popup (Hidden by default, triggered on @ or click) -->
+      <div class="mention-popup-container hidden" id="mention-popup">
         <ul class="mention-list" id="mention-list">
           
           <!-- 1. Rahul Sharma (Client) -->
@@ -363,7 +375,7 @@ Some users are facing trouble.</p>
         </button>
 
         <!-- Mention @ Button -->
-        <button class="btn btn-default btn-attach active" title="Mention someone" id="btn-mention-trigger">
+        <button class="btn btn-default btn-attach" title="Mention someone" id="btn-mention-trigger">
           <svg viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="4"/>
             <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>
@@ -377,8 +389,7 @@ Some users are facing trouble.</p>
           type="text" 
           id="chat-input" 
           class="chat-input-field" 
-          value="@Rahul can you check this and confirm?" 
-          placeholder="Type a message..." 
+          placeholder="Type a message or type @ to mention..." 
           autocomplete="off"
         >
         <!-- Emoji Button -->
